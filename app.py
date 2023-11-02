@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 from streamlit_lottie import st_lottie
@@ -9,6 +8,7 @@ from streamlit_timeline import timeline
 import plotly.express as px
 import pandas as pd
 import plotly.figure_factory as ff
+from PIL import Image
 
 
  # sidebar menu
@@ -28,15 +28,15 @@ if item == 'Get to know me':
     st.write("""
     - 🧑‍💻 I am a **data analist** @ [ESSENT](https://www.essent.nl/) working on multiple projects such as the BTI APP, Conversational Dashboarding, Forecasting projects for Digital / WFM
 
-    - ❤️ I am passionate about solving interesting data puzzles, working days on end on a query and it resulting in something awesome, creating a data-product that is both visually attractive as well as providing stakeholders the tool to take action based on data
+    - ❤️ I am passionate about solving interesting data puzzles, working days on end on a query and it resulting in something awesome, creating a data product that is both visually attractive as well as providing stakeholders with the tools to take action based on data
         
     - 🏃🏼‍♀️ Recently noticed that I quite like **running** and **yoga**
              
-    - 🪡 To relax I like to create my own clothing
+    - 🪡 To relax I like to create my own clothing, my most loved piece is a sweater made from Nike socks
     
     - 📫 How to reach me: sophie.bode@essent.nl
     
-    - 🏠 Groningen
+    - 🏠 I live in Groningen and travel almost 2.000 km's a month to go to work
     """)
 
 
@@ -58,6 +58,13 @@ if item == 'Where I am':
     plt.imshow(cloud)
     plt.axis("off")
     st.pyplot(fig)
+
+
+    st.subheader('What I made recently spiking my interest to combine data and visual storytelling')
+
+    image = Image.open('sunrise.jpg')
+
+    st.image(image, caption='Sunrise by the mountains')
 
 
 ##st.write(f'The selected button label is: {btn}')
