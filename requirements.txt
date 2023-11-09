@@ -1,0 +1,9 @@
+ streamlit 
+ streamlit_antd_components 
+ wordcloud  
+ matplotlib.pyplot
+ streamlit_timeline 
+ plotly.express 
+ pandas 
+ plotly.figure_factory 
+ PIL
