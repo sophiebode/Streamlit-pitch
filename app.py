@@ -1,5 +1,6 @@
-import streamlit as st
+############################################### IMPORT PACKAGES #######################################################################
 
+import streamlit as st
 import streamlit_antd_components as sac
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -8,7 +9,11 @@ import plotly.express as px
 import pandas as pd
 import plotly.figure_factory as ff
 from PIL import Image
-##import streamlit_wordcloud as wc
+import matplotlib.pyplot as plt
+from matplotlib_venn import venn3
+
+############################################### SIDEBAR MENU #######################################################################
+
 
  # sidebar menu
 with st.sidebar.container():
@@ -17,6 +22,8 @@ with st.sidebar.container():
     sac.MenuItem('Waar sta ik', icon='geo'),
     sac.MenuItem('Waar wil ik heen', icon='signpost-split'),
     ], format_func='title', open_all=True)
+
+############################################### WIE BEN IK #######################################################################
 
 
 if item == 'Wie ben ik':
@@ -35,23 +42,16 @@ if item == 'Wie ben ik':
              
     🪡 Om te ontspannen maak ik graag mijn eigen kleding, mijn meest geliefde stuk is een trui gemaakt van Nike-sokken
     
-    📫 Zo kun je mij bereiken: sophie.bode@essent.nl
+    📫 Zo kun je mij bereiken: sophie.bode@essent.nl  """)
+            
              
-      
              
-
-
-
-
-
- -------------------------------------------------------------------------------------------------------------------------------------
-
-             
- *Mijn data hart gaat sneller kloppen van klant data en dan voornamelijk de kwalitatieve inzichten: hoe kunnen we de klant nou zo goed mogelijk helpen en zijn/haar gevoel het beste kwantificeren? 
- Hoe kunnen we sentiment of open input van klanten meenemen als voorspeller van toekomstig gedrag?*
+ ###*Mijn data hart gaat sneller kloppen van klant data en dan voornamelijk de kwalitatieve inzichten: hoe kunnen we de klant nou zo goed mogelijk helpen en zijn/haar gevoel het beste kwantificeren? 
+ ###Hoe kunnen we sentiment of open input van klanten meenemen als voorspeller van toekomstig gedrag?*
      
-    """)
+  
 
+############################################### WAAR STA IK #######################################################################
 
 if item == 'Waar sta ik':
 
@@ -97,10 +97,12 @@ if item == 'Waar sta ik':
 
 ##st.write(f'The selected button label is: {btn}')
 
+############################################### WAAR WIL IK HEEN #######################################################################
+
 if item == 'Waar wil ik heen':
 
     btn = sac.buttons(
-    items=['WordCloud', 'Focusgebied', 'Roadmap'],
+    items=['Ontwikkeling roadmap', 'WordCloud'],
     index=0,
     format_func='title',
     align='center',
@@ -129,37 +131,67 @@ if item == 'Waar wil ik heen':
         plt.axis("off")
         st.pyplot(fig)
 
-    if btn == 'Focusgebied':
+    if btn == 'Ontwikkeling roadmap':
 
-        st.subheader("Focusgebieden")
-        st.write("""
-                
-                - Storytelling en visuele tooling om data inzichten nog meer kracht bij te zetten
-                - Machine learning skills 
-                - Meer ruimte nemen voor eigen ontwikkeling 
-                - Kennisdeling en begeleidende rol binnen het team
+        def venn_diagram():
+            # Modify the set_sizes to reflect the desired sizes of the circles
+            set_sizes = (2, 1.5, 1, 0.5, 0.5, 0.5, 0.5)
+            venn_labels = {'100': 'Analytical skills',
+                           '010': 'Networking',
+                           '001': 'Visualisation/storytelling',
+                           '110': '',
+                           '101': '',
+                           '011': '',
+                           '111': ''}
 
-                """)
+            fig, ax = plt.subplots()
+            venn = venn3(subsets=set_sizes, ax=ax)
 
+            # Customize the labels in the diagram
+            for idx, label in venn_labels.items():
+                venn.get_label_by_id(idx).set_text(label)
 
-    if btn == 'Roadmap':
-        st.subheader("Roadmap")
+            return fig
 
+        # Create columns
+        col1, col2 = st.columns([1,2])
 
-        df = pd.DataFrame([
-        dict(Task="Pitch dag", Start='2023-11-13', Finish='2023-11-14'),
-        dict(Task="Kennis ophalen / meelopen met UI/UX team", Start='2024-02-01', Finish='2024-04-01'),
-        dict(Task="Begeleiding bieden aan collega (startende) analisten", Start='2024-01-01', Finish='2024-12-01'),
-        dict(Task="Storytelling cursus", Start='2024-06-01', Finish='2024-07-01'),
-        dict(Task="Mentor programma volgen", Start='2024-02-01', Finish='2024-07-01')
-        ])
+        with col1:
+            # Roadmap
+            df = pd.DataFrame([
+                dict(Task="Analytical skill set opbouwen", Start='2021-12-02', Finish='2023-12-30'),  
+                dict(Task="Netwerk opbouwen", Start='2021-12-02', Finish='2023-12-30'),  
+                dict(Task="Domein kennis opbouwen", Start='2021-12-02', Finish='2023-12-30'),  
+                dict(Task="Pitch dag", Start='2023-11-13', Finish='2023-11-14'),
+                dict(Task="Data storytelling", Start='2024-01-01', Finish='2024-12-01'),
+                dict(Task="Begeleide rol", Start='2024-01-01', Finish='2024-12-01'),
+            ])
+            fig_roadmap = ff.create_gantt(df)
+            st.plotly_chart(fig_roadmap)
 
-        fig = ff.create_gantt(df)
-        st.plotly_chart(fig)
+        with col2:
+            st.subheader("Roadmap")
+            st.write(""" 
+            """)
+        
+        # Create columns
+        col3, col4 = st.columns([1,2])
+        
+        with col3:
+            fig_venn = venn_diagram()
+            st.pyplot(fig_venn)
+        
+        with col4:
+            st.subheader("Focusgebieden voor ontwikkeling")
+            st.write("""
+                     - Focus op het samenbrengen van networking, visualization en storytelling skillset met mijn analytical skills. 
+                     - Een begeleidende rol op mij nemen voor collega analisten.
+            """)
 
-    ##fig = px.timeline(df, x_start='Start', x_end='Finish', y='Task')
-   ## fig.update_yaxes(autorange="reversed") 
-   ## st.plotly_chart(fig)
+        
+
+    
      
+
 
 
