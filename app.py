@@ -163,8 +163,10 @@ if item == 'Waar wil ik heen':
                 dict(Task="Netwerk opbouwen", Start='2021-12-02', Finish='2023-12-30'),  
                 dict(Task="Domein kennis opbouwen", Start='2021-12-02', Finish='2023-12-30'),  
                 dict(Task="Pitch dag", Start='2023-11-13', Finish='2023-11-14'),
-                dict(Task="Data storytelling", Start='2024-01-01', Finish='2024-12-01'),
-                dict(Task="Begeleide rol", Start='2024-01-01', Finish='2024-12-01'),
+                dict(Task="Visualisatie/storytelling", Start='2024-01-01', Finish='2024-12-01'),
+                dict(Task="Netwerken", Start='2024-01-01', Finish='2024-12-01'),
+                dict(Task="Analytical skill set verder uitbreiden", Start='2024-01-01', Finish='2024-12-01'),
+                dict(Task="Begeleiding (junior) analisten", Start='2024-01-01', Finish='2024-12-01'),
             ])
             fig_roadmap = ff.create_gantt(df)
             st.plotly_chart(fig_roadmap)
